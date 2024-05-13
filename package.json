@@ -1,0 +1,31 @@
+{
+  "name": "qa_test_project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run build && wdio run ./wdio.conf.mjs",
+    "wdio": "wdio run --config wdio.conf.mjs",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/chai": "^4.3.16",
+    "@types/node": "^20.12.11",
+    "@wdio/allure-reporter": "^8.36.1",
+    "@wdio/cli": "^8.36.1",
+    "@wdio/cucumber-framework": "^8.36.1",
+    "@wdio/local-runner": "^8.36.1",
+    "@wdio/mocha-framework": "^8.36.1",
+    "@wdio/spec-reporter": "^8.36.1",
+    "@wdio/types": "^8.36.1",
+    "chai": "^5.1.1",
+    "typescript": "^5.4.5",
+    "webdriverio": "^8.36.1"
+  },
+  "dependencies": {
+    "@cucumber/cucumber": "^10.7.0"
+  }
+}
