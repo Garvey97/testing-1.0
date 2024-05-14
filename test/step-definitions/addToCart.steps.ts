@@ -1,5 +1,5 @@
 import { Given, When, Then } from '@cucumber/cucumber';
-// import { expect } from 'chai';
+import { expect } from 'chai';
 import { browser } from 'webdriverio';
 
 Given('User is logged in', async () => {
@@ -25,5 +25,5 @@ Then('The product {string} should be added to the shopping cart', async (product
   const productNames = await Promise.all(cartItems.map(async (item) => {
     return await item.getText();
   }));
-  expect(productNames).toContain(productName);
+  expect(productNames).contain(productName);
 });

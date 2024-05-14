@@ -2,11 +2,11 @@
 
 import { join } from 'path';
 import { configureAllureReporter } from './test/support/report';
-import { defineStep } from '@cucumber/cucumber';
+// import { defineStep } from '@cucumber/cucumber';
 
 const config = {
   // Specify Test Files
-  specs: ['./test/**/*.js'],
+  specs: ['./test/**/*.ts'],
 
   // Configure Cucumber
   framework: 'cucumber',
