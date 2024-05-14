@@ -2,6 +2,7 @@
 
 import { Given, When, Then } from '@cucumber/cucumber';
 import { expect } from 'chai';
+import { browser } from 'webdriverio';
 
 Given('I am on the login page', async () => {
   await browser.url('https://www.saucedemo.com');

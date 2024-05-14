@@ -1,7 +1,8 @@
 // wdio.conf.mjs
 
 import { join } from 'path';
-// import { defineStep } from '@cucumber/cucumber';
+import { configureAllureReporter } from './test/support/report';
+import { defineStep } from '@cucumber/cucumber';
 
 const config = {
   // Specify Test Files
@@ -40,31 +41,22 @@ const config = {
     }],
   ],
 
-  // Hooks Configuration
-  beforeScenario(uri, feature, scenario) {
-    // Code to run before each scenario
+  before: () => {
+    configureAllureReporter(); // Initialize Allure Reporter
   },
 
-  afterScenario(uri, feature, scenario, result, sourceLocation) {
-    // Code to run after each scenario
+  // Hooks configuration
+  beforeScenario: () => {
+    // Before scenario logic (optional)
+  },
+  afterScenario: () => {
+    // After scenario logic (optional)
   },
 
   // TypeScript Configuration
   tsNodeOpts: {
     tsconfigFile: './tsconfig.json'
   },
-
-  // compileOpts: {
-  //   typescriptOpts: {
-  //     tsconfigFile: './tsconfig.json'
-  //   }
-  // },
-
-  // Other Webdriver.io Options
 };
-
-// Register step definitions using defineStep from Cucumber
-// import { loginSteps } from './test/step-definitions/login.steps';
-// loginSteps(defineStep);
 
 export default config;

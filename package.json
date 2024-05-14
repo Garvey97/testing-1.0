@@ -14,6 +14,7 @@
   "devDependencies": {
     "@types/chai": "^4.3.16",
     "@types/node": "^20.12.11",
+    "@types/webdriverio": "^5.0.0",
     "@wdio/allure-reporter": "^8.36.1",
     "@wdio/cli": "^8.36.1",
     "@wdio/cucumber-framework": "^8.36.1",

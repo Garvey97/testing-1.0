@@ -7,9 +7,8 @@
     "strict": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "outDir": "./test",
-    "types": ["node", "@wdio/globals/types"]
+    "noEmit": true,
+    "types": ["node", "webdriverio"]
   },
   "include": ["./test/**/*.ts"],
-  "exclude": ["node_modules"]
 }
