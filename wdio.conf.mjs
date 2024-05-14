@@ -5,7 +5,7 @@ import { join } from 'path';
 
 const config = {
   // Specify Test Files
-  specs: ['./test/**/*.feature'],
+  specs: ['./test/**/*.js'],
 
   // Configure Cucumber
   framework: 'cucumber',
