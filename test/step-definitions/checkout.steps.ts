@@ -1,7 +1,16 @@
-import { Given, When, Then } from '@cucumber/cucumber';
-import { browser } from 'webdriverio';
+import { Given, When, Then, After } from '@cucumber/cucumber';
+import { expect } from 'chai';
+import { remote } from 'webdriverio';
+
+let browser: any; // Declare the browser variable
 
 Given('User is logged in', async () => {
+  browser = await remote({
+    capabilities: {
+      browserName: 'chrome'
+    }
+  });
+
   await browser.url('https://www.saucedemo.com/');
   await browser.setValue('[data-test="username"]', 'standard_user');
   await browser.setValue('[data-test="password"]', 'secret_sauce');
@@ -30,5 +39,12 @@ When('User confirms the purchase', async () => {
 
 Then('User should see the order confirmation', async () => {
   const confirmationMessage = await browser.getText('.complete-header');
-  expect(confirmationMessage).toBe('THANK YOU FOR YOUR ORDER');
+  expect(confirmationMessage).to.equal('THANK YOU FOR YOUR ORDER');
+});
+
+// Clean up the browser session after all scenarios
+After(async () => {
+  if (browser) {
+    await browser.deleteSession(); // Close the browser session
+  }
 });

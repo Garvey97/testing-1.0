@@ -2,17 +2,18 @@
 
 import { join } from 'path';
 import { configureAllureReporter } from './test/support/report';
-// import { defineStep } from '@cucumber/cucumber';
 
+// Define the configuration object
 const config = {
-  // Specify Test Files
+  // Specify Test Files (Step Definitions)
   specs: ['./test/**/*.ts'],
 
-  // Configure Cucumber
+  // Configure the Test Framework (Cucumber)
   framework: 'cucumber',
+
+  // Cucumber Options
   cucumberOpts: {
-    require: ['./test/step-definitions/*.ts'], // Path to step definitions
-    // format: ['json:./test/reports/cucumber-report.json'], // Output cucumber json report
+    require: ['./test/step-definitions/*.ts'], // Path to Step Definitions
   },
 
   // Browser and WebDriver Configuration
@@ -24,10 +25,10 @@ const config = {
     }
   }],
 
-  // Timeout settings
+  // Timeout Settings
   timeout: 30000, // Timeout in milliseconds
 
-  // Retry settings
+  // Retry Settings
   specFileRetries: 2, // Number of retries for failing test files
   specFileRetriesDelay: 1000, // Delay between retries in milliseconds
 
@@ -37,26 +38,20 @@ const config = {
       outputDir: join(process.cwd(), './test/allure-results'),
       disableWebdriverStepsReporting: false,
       disableWebdriverScreenshotsReporting: false,
-      disableWebdriverStepsReporting: true,
+      disableWebdriverStepsReporting: true, // This line is redundant
     }],
   ],
 
+  // Hooks Configuration (Optional)
   before: () => {
     configureAllureReporter(); // Initialize Allure Reporter
   },
 
-  // Hooks configuration
-  beforeScenario: () => {
-    // Before scenario logic (optional)
-  },
-  afterScenario: () => {
-    // After scenario logic (optional)
-  },
-
-  // TypeScript Configuration
+  // TypeScript Configuration (Optional)
   tsNodeOpts: {
     tsconfigFile: './tsconfig.json'
   },
 };
 
+// Export the configuration object
 export default config;

@@ -1,29 +1,27 @@
-// report.ts
+import { AllureRuntime, InMemoryAllureWriter } from '@wdio/allure-reporter'
+import { join } from 'path';
 
-import { AllureReporter } from '@wdio/allure-reporter';
+// Initialize Allure runtime and specify output directory
+const allureOutputDir = join(process.cwd(), './test/allure-results');
+const allure = new AllureRuntime({ resultsDir: allureOutputDir });
 
-declare global {
-  namespace WebdriverIO {
-    interface Browser {
-      reporter: {
-        allure: AllureReporter;
-      };
-    }
-  }
+// Configure Allure reporter with custom settings
+export function configureAllureReporter(): void {
+  const writer = new InMemoryAllureWriter();
+  allure.setWriter(writer);
+
+  // Add custom reporter options here
+  allure.reporter.options.disableWebdriverScreenshotsReporting = false;
+  allure.reporter.options.disableWebdriverStepsReporting = true; // Set as needed
 }
 
-export function configureAllureReporter() {
-  const allure = new AllureReporter({
-    outputDir: './allure-results',
-    disableWebdriverStepsReporting: false,
-    disableWebdriverScreenshotsReporting: false,
-  });
-  allure.cleanAllureDir();
-  allure.writeCategories([
-    { name: 'Critical', matchedStatuses: ['failed'] },
-    { name: 'High', matchedStatuses: ['failed'] },
-    { name: 'Medium', matchedStatuses: ['failed'] },
-    { name: 'Low', matchedStatuses: ['failed'] },
-  ]);
-  browser.reporter = { allure };
+// Function to attach screenshots to Allure report
+export function attachScreenshotToAllureReport(screenshot: Buffer): void {
+  allure.createAttachment(
+    'Screenshot',
+    screenshot,
+    'image/png'
+  );
 }
+
+export default allure;

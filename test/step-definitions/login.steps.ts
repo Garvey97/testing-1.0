@@ -1,10 +1,16 @@
-// login.steps.ts
-
-import { Given, When, Then } from '@cucumber/cucumber';
+import { Given, When, Then, After } from '@cucumber/cucumber';
 import { expect } from 'chai';
-import { browser } from 'webdriverio';
+import { remote } from 'webdriverio';
+
+let browser: any; // Declare the browser variable
 
 Given('I am on the login page', async () => {
+  browser = await remote({
+    capabilities: {
+      browserName: 'chrome'
+    }
+  });
+
   await browser.url('https://www.saucedemo.com');
 });
 
@@ -30,4 +36,11 @@ Then('I should be logged in successfully', async () => {
 Then('I should see an error message', async () => {
   const errorMessage = await browser.$('.error-message').getText(); // Use browser.$ to locate element and get text
   expect(errorMessage).to.contain('Username and password do not match');
+});
+
+// Clean up the browser session after all scenarios
+After(async () => {
+  if (browser) {
+    await browser.deleteSession(); // Close the browser session
+  }
 });

@@ -1,8 +1,16 @@
-import { Given, When, Then } from '@cucumber/cucumber';
+import { Given, When, Then, After } from '@cucumber/cucumber';
 import { expect } from 'chai';
-import { browser } from 'webdriverio';
+import { remote } from 'webdriverio';
+
+let browser: any; // Declare the browser variable
 
 Given('User is logged in', async () => {
+  browser = await remote({
+    capabilities: {
+      browserName: 'chrome'
+    }
+  });
+
   await browser.url('https://www.saucedemo.com/');
   await browser.setValue('[data-test="username"]', 'standard_user');
   await browser.setValue('[data-test="password"]', 'secret_sauce');
@@ -22,8 +30,15 @@ Then('The product {string} should be added to the shopping cart', async (product
   const cartIcon = await browser.$('.shopping_cart_link');
   await cartIcon.click();
   const cartItems = await browser.$$('.inventory_item_name');
-  const productNames = await Promise.all(cartItems.map(async (item) => {
+  const productNames = await Promise.all(cartItems.map(async (item: any) => {
     return await item.getText();
   }));
-  expect(productNames).contain(productName);
+  expect(productNames).to.include(productName); // Use 'to.include' for Chai expect assertion
+});
+
+// Clean up the browser session after all scenarios
+After(async () => {
+  if (browser) {
+    await browser.deleteSession(); // Close the browser session
+  }
 });

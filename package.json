@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@cucumber/cucumber": "^10.7.0",
     "@types/chai": "^4.3.16",
     "@types/node": "^20.12.11",
     "@types/webdriverio": "^5.0.0",
@@ -22,10 +23,9 @@
     "@wdio/spec-reporter": "^8.36.1",
     "@wdio/types": "^8.36.1",
     "chai": "^5.1.1",
+    "cucumber": "^6.0.7",
+    "cucumber-junit-convert": "^2.1.1",
     "typescript": "^5.4.5",
     "webdriverio": "^8.36.1"
-  },
-  "dependencies": {
-    "@cucumber/cucumber": "^10.7.0"
   }
 }
