@@ -38,9 +38,4 @@ Then('I should see an error message', async () => {
   expect(errorMessage).to.contain('Username and password do not match');
 });
 
-// Clean up the browser session after all scenarios
-After(async () => {
-  if (browser) {
-    await browser.deleteSession(); // Close the browser session
-  }
-});
+

@@ -36,10 +36,3 @@ Then('User should be logged out successfully', async () => {
   const currentUrl = await browser.getUrl();
   expect(currentUrl).to.equal('https://www.saucedemo.com/');
 });
-
-// Clean up the browser session after all scenarios
-After(async () => {
-  if (browser) {
-    await browser.deleteSession(); // Close the browser session
-  }
-});

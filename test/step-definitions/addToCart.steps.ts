@@ -35,10 +35,3 @@ Then('The product {string} should be added to the shopping cart', async (product
   }));
   expect(productNames).to.include(productName); // Use 'to.include' for Chai expect assertion
 });
-
-// Clean up the browser session after all scenarios
-After(async () => {
-  if (browser) {
-    await browser.deleteSession(); // Close the browser session
-  }
-});

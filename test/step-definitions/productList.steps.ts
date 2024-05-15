@@ -26,10 +26,3 @@ Then('User should see the list of available products', async () => {
   expect(productItems.length).to.be.greaterThan(0);
   // Additional assertions can be added to verify specific products in the list
 });
-
-// Clean up the browser session after all scenarios
-After(async () => {
-  if (browser) {
-    await browser.deleteSession(); // Close the browser session
-  }
-});

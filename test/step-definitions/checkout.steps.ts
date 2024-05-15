@@ -41,10 +41,3 @@ Then('User should see the order confirmation', async () => {
   const confirmationMessage = await browser.getText('.complete-header');
   expect(confirmationMessage).to.equal('THANK YOU FOR YOUR ORDER');
 });
-
-// Clean up the browser session after all scenarios
-After(async () => {
-  if (browser) {
-    await browser.deleteSession(); // Close the browser session
-  }
-});
